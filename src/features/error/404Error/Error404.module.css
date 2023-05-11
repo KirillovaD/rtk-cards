@@ -1,0 +1,11 @@
+.error404 {
+    width: 451px;
+    height: 100%;
+}
+
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}

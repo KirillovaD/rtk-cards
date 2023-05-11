@@ -1,0 +1,70 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    text-align: center;
+
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    padding: 35px 40px 50px 40px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 25vw;
+
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    text-align: center;
+
+    color: #000000;
+
+}
+
+.rememberMe {
+    padding-top: 30px;
+}
+
+.button_footer {
+    display: flex;
+    flex-direction: column;
+    padding-top: 30px;
+    gap: 30px;
+}
+
+/*.button_footer button{*/
+/*    margin-top: 30px;*/
+/*}*/
+.form a {
+    align-self: flex-end;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 14px;
+    line-height: 17px;
+    color: #000000;
+    text-decoration: none;
+}
+
+.card p {
+    padding-top: 30px;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 24px;
+    color: #000000;
+    opacity: 0.5;
+}
+.card button{
+    border-radius: 20px;
+}
