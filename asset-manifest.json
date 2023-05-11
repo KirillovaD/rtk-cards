@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/.github.io/rtk-cards/static/css/main.f3ad01f4.css",
-    "main.js": "/.github.io/rtk-cards/static/js/main.31f7acc7.js",
-    "static/media/Ellipse 45.png": "/.github.io/rtk-cards/static/media/Ellipse 45.92388e565315030f112c.png",
-    "static/media/404.svg": "/.github.io/rtk-cards/static/media/404.9ec31c0ba8d95b0480272e46af98c955.svg",
-    "index.html": "/.github.io/rtk-cards/index.html",
-    "main.f3ad01f4.css.map": "/.github.io/rtk-cards/static/css/main.f3ad01f4.css.map",
-    "main.31f7acc7.js.map": "/.github.io/rtk-cards/static/js/main.31f7acc7.js.map"
+    "main.css": "/rtk-cards/static/css/main.0bc9dcf5.css",
+    "main.js": "/rtk-cards/static/js/main.63c21c3e.js",
+    "static/media/Ellipse 45.png": "/rtk-cards/static/media/Ellipse 45.92388e565315030f112c.png",
+    "static/media/404.svg": "/rtk-cards/static/media/404.9ec31c0ba8d95b0480272e46af98c955.svg",
+    "index.html": "/rtk-cards/index.html",
+    "main.0bc9dcf5.css.map": "/rtk-cards/static/css/main.0bc9dcf5.css.map",
+    "main.63c21c3e.js.map": "/rtk-cards/static/js/main.63c21c3e.js.map"
   },
   "entrypoints": [
-    "static/css/main.f3ad01f4.css",
-    "static/js/main.31f7acc7.js"
+    "static/css/main.0bc9dcf5.css",
+    "static/js/main.63c21c3e.js"
   ]
 }
