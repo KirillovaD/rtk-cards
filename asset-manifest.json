@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/rtk-cards/static/css/main.0bc9dcf5.css",
-    "main.js": "/rtk-cards/static/js/main.046f16a6.js",
+    "main.css": "/rtk-cards/static/css/main.7b920e16.css",
+    "main.js": "/rtk-cards/static/js/main.50db5a5b.js",
     "static/media/Ellipse 45.png": "/rtk-cards/static/media/Ellipse 45.92388e565315030f112c.png",
     "static/media/404.svg": "/rtk-cards/static/media/404.9ec31c0ba8d95b0480272e46af98c955.svg",
     "index.html": "/rtk-cards/index.html",
-    "main.0bc9dcf5.css.map": "/rtk-cards/static/css/main.0bc9dcf5.css.map",
-    "main.046f16a6.js.map": "/rtk-cards/static/js/main.046f16a6.js.map"
+    "main.7b920e16.css.map": "/rtk-cards/static/css/main.7b920e16.css.map",
+    "main.50db5a5b.js.map": "/rtk-cards/static/js/main.50db5a5b.js.map"
   },
   "entrypoints": [
-    "static/css/main.0bc9dcf5.css",
-    "static/js/main.046f16a6.js"
+    "static/css/main.7b920e16.css",
+    "static/js/main.50db5a5b.js"
   ]
 }
