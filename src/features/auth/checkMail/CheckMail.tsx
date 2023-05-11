@@ -5,7 +5,7 @@ import { NavLink } from "react-router-dom";
 
 import checkMail from "./check_email.png";
 import { useAppDispatch } from "common/hooks";
-import { PATH } from "router";
+import { PATH } from "common/components/main/paths";
 
 export const CheckMail = () => {
   const dispatch = useAppDispatch();

@@ -14,7 +14,6 @@ const slice = createSlice({
   extraReducers: (builder) => {
     builder
       .addCase(login.fulfilled, (state, action) => {
-        debugger;
         state.profile = action.payload.profile;
         state.isLoggedIn = action.payload.isLoggedIn;
       })

@@ -1,15 +1,15 @@
 import React, { useRef, useState } from "react";
 import s from "./style.module.css";
 import { Button, FormControl, FormGroup, Grid, IconButton, InputAdornment, Paper, TextField } from "@mui/material";
-import { NavLink, useNavigate } from "react-router-dom";
+import { Navigate, NavLink, Route, Routes, useNavigate } from "react-router-dom";
 import { useAppDispatch } from "common/hooks";
-import { PATH } from "router";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { authThunks } from "features/auth/auth.slice";
 import { toast } from "react-toastify";
+import { PATH } from "common/components/main/paths";
 
 const schema = yup.object().shape({
   email: yup

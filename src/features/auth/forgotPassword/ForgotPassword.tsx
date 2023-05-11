@@ -3,12 +3,12 @@ import React from "react";
 import { Button, FormControl, FormGroup, Grid, Paper, TextField } from "@mui/material";
 import { NavLink } from "react-router-dom";
 import { useAppDispatch } from "common/hooks";
-import { PATH } from "router";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { authThunks } from "features/auth/auth.slice";
 import { toast } from "react-toastify";
 import * as yup from "yup";
+import { PATH } from "common/components/main/paths";
 
 const schema = yup.object().shape({
   email: yup

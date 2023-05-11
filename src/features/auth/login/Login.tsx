@@ -18,7 +18,6 @@ import { Navigate, NavLink } from "react-router-dom";
 
 import { useAppDispatch } from "common/hooks";
 import { toast } from "react-toastify";
-import { PATH } from "router";
 import { useForm } from "react-hook-form";
 import { ArgLoginType } from "features/auth/auth.api";
 import { useSelector } from "react-redux";
@@ -26,6 +25,7 @@ import { selectIsLoggedIn } from "features/auth/auth.selectors";
 import * as yup from "yup";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { PATH } from "common/components/main/paths";
 
 const schema = yup.object().shape({
   email: yup
@@ -128,7 +128,7 @@ export const Login = () => {
             </FormControl>
           </form>
           <p>Don't have an account?</p>
-          <NavLink to={PATH.REGISTER}>Sign Up</NavLink>
+          <NavLink to={PATH.REGISTRATION}>Sign Up</NavLink>
         </Paper>
       </Grid>
     </div>

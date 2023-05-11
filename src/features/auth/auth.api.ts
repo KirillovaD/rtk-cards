@@ -1,4 +1,5 @@
-import { instance } from "common/api/common.api";
+import { instance, instanceHeroku } from "common/api/common.api";
+import { emailRecoveryMessage } from "common/constants/emailRecoveryMessage";
 
 export const authApi = {
   register: (arg: ArgRegisterType) => {
@@ -12,14 +13,17 @@ export const authApi = {
   },
   forgotPassword: (email: string) => {
     debugger;
-    return instance.post("https://neko-back.herokuapp.com/2.0/auth/forgot", {
+    return instanceHeroku.post("auth/forgot", {
       email,
       from: "test-front-admin <ai73a@yandex.by>",
-      message:
-        "<div>password recovery link:\n" +
-        '<a href="http://localhost:3000/#/set-new-password/$token$">\n' +
-        "link</a></div> ",
+      message: emailRecoveryMessage,
     });
+  },
+  setNewPassword(arg: NewPasswordRequestType) {
+    return instanceHeroku.post<{ info: string }>("auth/set-new-password", arg);
+  },
+  logout: () => {
+    return instance.delete("auth/me");
   },
 };
 
@@ -46,9 +50,7 @@ export type ProfileType = {
   token: string;
   tokenDeathTime: number;
 };
-
-// export type ForgotPasswordArg = {
-//   email: string;
-//   from?: string;
-//   message: string;
-// };
+export type NewPasswordRequestType = {
+  password: string;
+  resetPasswordToken: string;
+};

@@ -4,13 +4,11 @@ import { Button, Grid, Paper } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
 import profileImg from "./Ellipse 45.png";
-import { useAppDispatch } from "common/hooks";
-import { PATH } from "router";
 import { useSelector } from "react-redux";
 import { selectProfile } from "features/auth/auth.selectors";
+import { PATH } from "common/components/main/paths";
 
 export const Profile = () => {
-  const dispatch = useAppDispatch();
   const profile = useSelector(selectProfile);
 
   return (
