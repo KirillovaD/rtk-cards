@@ -20,13 +20,11 @@ code {
 
 a{
   font-style: normal;
-  font-weight: 600;
   font-size: 16px;
   line-height: 24px;
   text-align: center;
-  text-decoration-line: underline;
+  text-decoration-line: none;
   color: #366EFF;
-
 }
 
 .error{
@@ -34,21 +32,24 @@ a{
 }
 
 h2{
-
-  font-weight: 600;
-  font-size: 22px;
+  font-weight: bold;
+  font-size: 1.25em;
   line-height: 27px;
   text-align: right;
   color: #000000;
-
 }
 h3{
-
-  font-weight: 500;
-  font-size: 20px;
+  font-weight: bold;
+  font-size: 1em;
   line-height: 24px;
   display: flex;
   align-items: center;
 
   color: #000000;
+}
+h1 {
+  font-famil: Montserrat;
+  font-weight: bold;
+  font-size: 1.5em;
+  color: #001a58;
 }

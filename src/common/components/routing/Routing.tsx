@@ -1,12 +1,12 @@
 import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import { PATH } from "common/components/main/paths";
+import { PATH } from "common/components/routing/paths";
 import { Login } from "features/auth/login/Login";
 import { ForgotPassword } from "features/auth/forgotPassword/ForgotPassword";
 import { CheckMail } from "features/auth/checkMail/CheckMail";
 import { SetNewPassword } from "features/auth/setNewPassword/setNewPassword";
 import Error404 from "features/error/404Error/Error404";
-import { PrivateRoutes } from "common/components/main/PrivateRoutes";
+import { PrivateRoutes } from "common/components/routing/PrivateRoutes";
 import { Profile } from "features/profile/Profile";
 import { Packs } from "features/packs/Paks";
 import { Cards } from "features/cards/Cards";

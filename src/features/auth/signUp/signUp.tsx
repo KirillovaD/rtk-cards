@@ -9,7 +9,7 @@ import * as yup from "yup";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { authThunks } from "features/auth/auth.slice";
 import { toast } from "react-toastify";
-import { PATH } from "common/components/main/paths";
+import { PATH } from "common/components/routing/paths";
 
 const schema = yup.object().shape({
   email: yup
@@ -170,9 +170,11 @@ export const SignUp = () => {
                   )}
                 />
                 {errors.password_repeat && <p className={s.error}>{errors.password_repeat.message}</p>}
-                <Button type={"submit"} variant={"contained"} color={"primary"} onClick={handleSubmit(onSubmit)}>
-                  Sign Up
-                </Button>
+                <div className={s.button_footer}>
+                  <Button type={"submit"} variant={"contained"} color={"primary"} onClick={handleSubmit(onSubmit)}>
+                    Sign Up
+                  </Button>
+                </div>
               </FormGroup>
             </FormControl>
           </form>

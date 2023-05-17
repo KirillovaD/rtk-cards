@@ -1,36 +1,38 @@
 import { GlobalError } from "common/components/globalError/GlobalError";
-import { useAppDispatch } from "common/hooks";
-import { HashRouter, Navigate } from "react-router-dom";
-import React, { useEffect } from "react";
-import { authThunks } from "features/auth/auth.slice";
+import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import { selectIsInitializes } from "app/app.selectors";
 import { selectIsLoggedIn } from "features/auth/auth.selectors";
 import { Header } from "common/header/Header";
-import { Routing } from "common/components/main/Routing";
-import { PATH } from "common/components/main/paths";
+import { Routing } from "common/components/routing/Routing";
+import { Sidebar } from "common/sidebar/Sidebar";
+import s from "./style.module.css";
 
 function App() {
   const isLoggedIn = useSelector(selectIsLoggedIn);
   const isInitialized = useSelector(selectIsInitializes);
+  const [open, setOpen] = useState(false);
+  const handleClose = () => setOpen(false);
+  const handleOpen = () => setOpen(true);
 
-  const dispatch = useAppDispatch();
-  useEffect(() => {
-    dispatch(authThunks.initializeApp);
-  }, [dispatch]);
+  // const dispatch = useAppDispatch();
+  // useEffect(() => {
+  //   dispatch(authThunks.initializeApp());
+  // }, [dispatch]);
 
-  if (isInitialized) {
-    return <Navigate to={PATH.PACKS} />;
-  }
+  // if (isInitialized) {
+  //   return <Navigate to={PATH.PACKS} />;
+  // }
 
   return (
-    <HashRouter>
-      <div className="App">
-        <GlobalError />
-        <Header isLoggedIn={isLoggedIn} />
+    <div className={s.app}>
+      <GlobalError />
+      <Sidebar open={open} handleClose={handleClose} />
+      <Header isLoggedIn={isLoggedIn} handleOpen={handleOpen} />
+      <div className={s.wrapper}>
         <Routing />
       </div>
-    </HashRouter>
+    </div>
   );
 }
 

@@ -1,26 +1,67 @@
 import s from "./style.module.css";
-import React from "react";
-import { Button, Grid, Paper } from "@mui/material";
-import { NavLink } from "react-router-dom";
-
+import React, { ChangeEvent, useEffect, useState } from "react";
+import { Button, Grid, Paper, TextField } from "@mui/material";
 import profileImg from "./Ellipse 45.png";
 import { useSelector } from "react-redux";
 import { selectProfile } from "features/auth/auth.selectors";
-import { PATH } from "common/components/main/paths";
+import LogoutIcon from "@mui/icons-material/Logout";
+import { useAppDispatch } from "common/hooks";
+import { authThunks } from "features/auth/auth.slice";
+import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
+import EditIcon from "@mui/icons-material/Edit";
 
 export const Profile = () => {
+  const [editMode, setEditMode] = useState(false);
   const profile = useSelector(selectProfile);
+  const [name, setName] = useState<string | null>(profile?.name || null);
 
+  const dispatch = useAppDispatch();
+  const logoutHandler = () => {
+    dispatch(authThunks.logout());
+  };
+
+  const changeEditModeHandler = () => {
+    setEditMode(true);
+  };
+  const changeNameHandler = (e: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setName(e.currentTarget.value);
+  };
+  useEffect(() => {
+    if (name !== profile?.name) {
+      dispatch(authThunks.changeProfileData({ name }));
+    }
+  }, [name]);
   return (
     <div className={s.wrapper}>
       <Grid item xs={4}>
-        <Paper elevation={3} className={s.card}>
+        <Paper elevation={3} className={s.card} sx={{ position: "relative" }}>
           <h2>Personal Information</h2>
           <img src={profileImg} alt={"Profile image"} className={s.profileImage} />
-          <h3>{profile?.name}</h3>
+          <PhotoCameraIcon className={s.changePhoto} sx={{ position: "absolute", top: "160px", right: "110px" }} />
+          {editMode ? (
+            <TextField
+              type="text"
+              variant="standard"
+              margin="normal"
+              autoFocus
+              value={name}
+              onChange={(e) => changeNameHandler(e)}
+              onBlur={() => setEditMode(false)}
+              onKeyDown={(e) => e.key === "Enter" && setEditMode(false)}
+            />
+          ) : (
+            <h3>{profile?.name}</h3>
+          )}
+          {!editMode && (
+            <EditIcon
+              className={s.changeName}
+              sx={{ position: "absolute", top: "225px", right: "40px" }}
+              onClick={changeEditModeHandler}
+            />
+          )}
           <p>{profile?.email}</p>
-          <Button type={"submit"} variant={"contained"} color={"primary"} component={NavLink} to={PATH.LOGIN}>
-            Back to login
+          <Button variant="outlined" color="primary" onClick={logoutHandler}>
+            <LogoutIcon color="primary" fontSize="small" sx={{ marginRight: "10px" }} /> Log Out
           </Button>
         </Paper>
       </Grid>

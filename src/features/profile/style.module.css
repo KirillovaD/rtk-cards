@@ -30,3 +30,7 @@
 .card button{
     border-radius: 20px;
 }
+.profileImage{
+    position: relative;
+}
+

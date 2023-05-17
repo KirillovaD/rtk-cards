@@ -45,3 +45,8 @@
     color: #000000;
     opacity: 0.5;
 }
+.card p.error{
+    color: red;
+    padding: 0;
+    opacity: 1;
+}

@@ -25,7 +25,7 @@ import { selectIsLoggedIn } from "features/auth/auth.selectors";
 import * as yup from "yup";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { PATH } from "common/components/main/paths";
+import { PATH } from "common/components/routing/paths";
 
 const schema = yup.object().shape({
   email: yup
@@ -60,11 +60,9 @@ export const Login = () => {
     dispatch(authThunks.login(data))
       .unwrap()
       .then((res) => {
-        debugger;
         toast.success("You are sign in");
       })
       .catch((err) => {
-        debugger;
         toast.error(err.response.data.error);
       });
   });

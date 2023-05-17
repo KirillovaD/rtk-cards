@@ -40,6 +40,9 @@
     padding-top: 30px;
     gap: 30px;
 }
+.button_footer button{
+    margin: 0 auto;
+}
 /*.button_footer button{*/
 /*    margin-top: 30px;*/
 /*}*/
@@ -61,9 +64,7 @@
     color: #000000;
     opacity: 0.5;
 }
-.card button{
-    border-radius: 20px;
-}
+
 .card p.error{
     color: red;
     padding: 0;

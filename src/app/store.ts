@@ -7,6 +7,7 @@ export const store = configureStore({
     app: appReducer,
     auth: authReducer,
   },
+  devTools: process.env.NODE_ENV !== "production",
 });
 
 export type AppDispatch = typeof store.dispatch;

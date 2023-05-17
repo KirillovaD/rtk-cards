@@ -1,5 +1,12 @@
 import { createSlice } from "@reduxjs/toolkit";
-import { ArgLoginType, ArgRegisterType, authApi, ProfileType } from "features/auth/auth.api";
+import {
+  ArgLoginType,
+  ArgProfileChangeData,
+  ArgRegisterType,
+  ArgSetNewPasswordType,
+  authApi,
+  ProfileType,
+} from "features/auth/auth.api";
 import { createAppAsyncThunk } from "common/utils/createAppAsyncThunk";
 import { thunkTryCatch } from "common/utils/thunkTryCatch";
 import { appActions } from "app/app.slice";
@@ -19,11 +26,14 @@ const slice = createSlice({
       })
       .addCase(initializeApp.fulfilled, (state, action) => {
         state.isLoggedIn = action.payload.isLoggedIn;
+        state.profile = action.payload.profile;
+      })
+      .addCase(logout.fulfilled, (state, action) => {
+        state.isLoggedIn = action.payload.isLoggedIn;
+      })
+      .addCase(changeProfileData.fulfilled, (state, action) => {
+        state.profile = action.payload.profile;
       });
-
-    // .addCase(initializeApp.fulfilled, (state, action) => {
-    //   state.isLoggedIn = action.payload.isLoggedIn;
-    // });
   },
 });
 
@@ -37,7 +47,9 @@ const login = createAppAsyncThunk<{ profile: ProfileType; isLoggedIn: boolean },
   "auth/login",
   async (arg, thunkAPI) => {
     return thunkTryCatch(thunkAPI, async () => {
+      const { dispatch } = thunkAPI;
       const res = await authApi.login(arg);
+      dispatch(appActions.setAppInitialized({ isInitialized: true }));
       return { profile: res.data, isLoggedIn: true };
     });
   }
@@ -50,17 +62,45 @@ const initializeApp = createAppAsyncThunk<{ profile: ProfileType; isLoggedIn: bo
       const { dispatch } = thunkAPI;
       const res = await authApi.me();
       dispatch(appActions.setAppInitialized({ isInitialized: true }));
-      return { isLoggedIn: true };
+      return { isLoggedIn: true, profile: res.data };
     });
   }
 );
 
-const forgotPassword = createAppAsyncThunk<void, string>("app/forgotPassword", async (email, thunkAPI) => {
+const forgotPassword = createAppAsyncThunk<void, string>("auth/forgotPassword", async (email, thunkAPI) => {
   return thunkTryCatch(thunkAPI, async () => {
     await authApi.forgotPassword(email);
   });
 });
 
+const logout = createAppAsyncThunk<{ isLoggedIn: boolean }, void>("auth/logout", async (_, thunkAPI) => {
+  return thunkTryCatch(thunkAPI, async () => {
+    const { dispatch } = thunkAPI;
+    dispatch(appActions.setAppInitialized({ isInitialized: false }));
+    await authApi.logout();
+    return { isLoggedIn: false };
+  });
+});
+
+const setNewPassword = createAppAsyncThunk<void, ArgSetNewPasswordType>(
+  "auth/setNewPassword",
+  async (arg, thunkAPI) => {
+    return thunkTryCatch(thunkAPI, async () => {
+      await authApi.setNewPassword(arg);
+    });
+  }
+);
+
+const changeProfileData = createAppAsyncThunk<{ profile: ProfileType }, ArgProfileChangeData>(
+  "auth/changeProfileData",
+  async (arg, thunkAPI) => {
+    return thunkTryCatch(thunkAPI, async () => {
+      const res = await authApi.changeProfileData(arg);
+      return { profile: res.data.updatedUser };
+    });
+  }
+);
+
 export const authReducer = slice.reducer;
 // export const authActions = slice.actions;
-export const authThunks = { register, login, initializeApp, forgotPassword };
+export const authThunks = { register, login, initializeApp, forgotPassword, logout, setNewPassword, changeProfileData };

@@ -12,7 +12,6 @@ export const authApi = {
     return instance.post<RegisterResponseType>("auth/me");
   },
   forgotPassword: (email: string) => {
-    debugger;
     return instanceHeroku.post("auth/forgot", {
       email,
       from: "test-front-admin <ai73a@yandex.by>",
@@ -25,8 +24,20 @@ export const authApi = {
   logout: () => {
     return instance.delete("auth/me");
   },
+
+  changeProfileData: (arg: ArgProfileChangeData) => {
+    return instance.put<UpdateUserType>("auth/me", arg);
+  },
+};
+export type ArgProfileChangeData = {
+  name?: string | null;
+  avatar?: string;
 };
 
+export type ArgSetNewPasswordType = {
+  password: string;
+  resetPasswordToken: string;
+};
 export type ArgRegisterType = Omit<ArgLoginType, "rememberMe">;
 export type ArgLoginType = {
   email: string;
@@ -53,4 +64,9 @@ export type ProfileType = {
 export type NewPasswordRequestType = {
   password: string;
   resetPasswordToken: string;
+};
+
+export type UpdateUserType = {
+  updatedUser: ProfileType;
+  error?: string;
 };
