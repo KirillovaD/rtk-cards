@@ -1,0 +1,7 @@
+.packsHeader{
+    display: flex;
+    justify-content: space-between;
+}
+.packsHeader h1{
+    flex-grow: 1;
+}
