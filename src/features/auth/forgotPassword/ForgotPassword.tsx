@@ -2,13 +2,13 @@ import s from "./style.module.css";
 import React from "react";
 import { Button, FormControl, FormGroup, Grid, Paper, TextField } from "@mui/material";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useAppDispatch } from "common/hooks";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { authThunks } from "features/auth/auth.slice";
 import { toast } from "react-toastify";
 import * as yup from "yup";
 import { PATH } from "common/components/routing/paths";
+import { useActions } from "common/hooks/useActions";
 
 const schema = yup.object().shape({
   email: yup
@@ -21,7 +21,7 @@ const schema = yup.object().shape({
     ),
 });
 export const ForgotPassword = () => {
-  const dispatch = useAppDispatch();
+  const { forgotPassword } = useActions(authThunks);
   const navigate = useNavigate();
 
   const {
@@ -31,7 +31,7 @@ export const ForgotPassword = () => {
   } = useForm({ resolver: yupResolver(schema) });
 
   const onSubmit = handleSubmit(({ email }) => {
-    dispatch(authThunks.forgotPassword(email))
+    forgotPassword(email)
       .unwrap()
       .then((res) => {
         toast.success("An email with instructions to recover your password has been sent to the email address.");

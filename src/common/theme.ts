@@ -28,7 +28,7 @@ export const theme = createTheme({
           color: "primary",
           cursor: "pointer",
           "&:hover": {
-            color: "#c4d6ff",
+            color: "#1565c0",
           },
         },
       },

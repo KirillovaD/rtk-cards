@@ -1,0 +1,8 @@
+.packs{
+    display: flex;
+    flex-direction: column;
+}
+.packs nav {
+    margin-top: 40px;
+    align-self: center;
+}

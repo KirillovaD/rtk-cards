@@ -3,19 +3,18 @@ import { NavLink } from "react-router-dom";
 import { PATH } from "common/components/routing/paths";
 import s from "./styles.module.css";
 import closeIcon from "./closeOutline.svg";
-import { IconButton } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { authThunks } from "features/auth/auth.slice";
-import { useAppDispatch } from "common/hooks";
+import { useActions } from "common/hooks/useActions";
 
 type Props = {
   open: boolean;
   handleClose: () => void;
 };
 export const Sidebar: FC<Props> = ({ open, handleClose }) => {
-  const dispatch = useAppDispatch();
+  const { logout } = useActions(authThunks);
   const logoutHandler = () => {
-    dispatch(authThunks.logout());
+    logout();
   };
   const sidebarClass = s.sidebar + (open ? " " + s.open : "");
   return (

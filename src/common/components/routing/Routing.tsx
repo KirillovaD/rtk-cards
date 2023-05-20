@@ -29,7 +29,6 @@ export const Routing = () => {
         <Route path={PATH.PACKS + PATH.CARDS} element={<Cards />} />
         <Route path={PATH.LEARN + "/:packId"} element={<Learn />} />
       </Route>
-      ;
     </Routes>
   );
 };

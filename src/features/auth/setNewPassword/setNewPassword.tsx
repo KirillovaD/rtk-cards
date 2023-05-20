@@ -2,14 +2,14 @@ import s from "./style.module.css";
 import React from "react";
 import { Button, FormControl, FormGroup, Grid, Paper, TextField } from "@mui/material";
 import { useForm } from "react-hook-form";
-import { ArgLoginType, ArgSetNewPasswordType } from "features/auth/auth.api";
+import { ArgSetNewPasswordType } from "features/auth/auth.api";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { authThunks } from "features/auth/auth.slice";
 import { toast } from "react-toastify";
-import { useAppDispatch } from "common/hooks";
 import * as yup from "yup";
 import { useNavigate, useParams } from "react-router-dom";
 import { PATH } from "common/components/routing/paths";
+import { useActions } from "common/hooks/useActions";
 
 const schema = yup.object().shape({
   password: yup
@@ -20,7 +20,7 @@ const schema = yup.object().shape({
 });
 
 export const SetNewPassword = () => {
-  const dispatch = useAppDispatch();
+  const { setNewPassword } = useActions(authThunks);
   const { token } = useParams<{ token: string }>();
   const navigate = useNavigate();
   const {
@@ -31,7 +31,7 @@ export const SetNewPassword = () => {
 
   const onSubmit = handleSubmit((data) => {
     if (token && data) {
-      dispatch(authThunks.setNewPassword({ password: data.password, resetPasswordToken: token }))
+      setNewPassword({ password: data.password, resetPasswordToken: token })
         .unwrap()
         .then((res) => {
           toast.success("New password was successfully updated");

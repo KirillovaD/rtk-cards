@@ -5,3 +5,8 @@
 .packsHeader h1{
     flex-grow: 1;
 }
+.addName{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}

@@ -1,6 +1,11 @@
 {
   "name": "rtk-cards",
   "homepage": "https://KirillovaD.github.io/rtk-cards",
+  "jest": {
+    "moduleNameMapper": {
+      "axios": "axios/dist/node/axios.cjs"
+    }
+  },
   "version": "0.1.0",
   "private": true,
   "dependencies": {

@@ -1,15 +1,23 @@
-import React, { FC, useState } from "react";
-import { Button, ButtonGroup, IconButton, InputAdornment, TextField } from "@mui/material";
+import React, { ChangeEvent, FC, useEffect, useState } from "react";
+import { Button, ButtonGroup, InputAdornment, TextField } from "@mui/material";
 import SearchIcon from "@mui/icons-material/Search";
 import Slider from "@mui/material/Slider";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import s from "./stylle.module.css";
+import { useAppSelector } from "common/hooks";
+import { selectProfile } from "features/auth/auth.selectors";
+import { useActions } from "common/hooks/useActions";
+import { packsThunks } from "features/packs/packs.slice";
+import { useSearchParams } from "react-router-dom";
 
 export const PacksFilterTab: FC = () => {
-  const [activeButton, setActiveButton] = useState<number | null>(null);
-
+  const [find, setFind] = useState("");
+  const [activeButton, setActiveButton] = useState<number>(1);
+  const profile = useAppSelector(selectProfile);
+  const { getPacks } = useActions(packsThunks);
   const handleButtonClick = (buttonIndex: number) => {
     setActiveButton(buttonIndex);
+    getPacks(buttonIndex ? {} : { user_id: profile?._id });
   };
   const minmin = 0;
   const maxmax = 100;
@@ -17,6 +25,23 @@ export const PacksFilterTab: FC = () => {
   const [maxNum, setMaxNum] = useState(maxmax);
 
   const [cardsRangeValue, setCardsRangeValue] = useState([0, 100]);
+
+  const [searchParams, setSearchParams] = useSearchParams();
+
+  const searchHandler = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setFind(event.currentTarget.value);
+    const findQ: any = event.currentTarget.value ? { find: event.currentTarget.value } : {};
+    const { find, ...props } = Object.fromEntries(searchParams);
+    setSearchParams({ ...props, findQ });
+  };
+  const sendQuery = (value: string) => {
+    getPacks({ packName: value });
+  };
+  useEffect(() => {
+    const params = Object.fromEntries(searchParams);
+    sendQuery(params.find || "");
+    setFind(params.find || "");
+  }, [searchParams]);
 
   const numberCardsChangeHandler = (event: any, newValue: any) => {
     setMinNumCards(newValue[0]);
@@ -28,10 +53,12 @@ export const PacksFilterTab: FC = () => {
       <div className={s.packsSearch}>
         <label htmlFor={"search"}>Search</label>
         <TextField
+          value={find}
           id="search"
           variant="outlined"
           name={"search"}
           size="small"
+          onChange={searchHandler}
           InputProps={{
             startAdornment: (
               <InputAdornment position="end">

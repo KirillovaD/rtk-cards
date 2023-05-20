@@ -2,22 +2,22 @@ import s from "./style.module.css";
 import React, { ChangeEvent, useEffect, useState } from "react";
 import { Button, Grid, Paper, TextField } from "@mui/material";
 import profileImg from "./Ellipse 45.png";
-import { useSelector } from "react-redux";
 import { selectProfile } from "features/auth/auth.selectors";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { useAppDispatch } from "common/hooks";
+import { useAppDispatch, useAppSelector } from "common/hooks";
 import { authThunks } from "features/auth/auth.slice";
 import PhotoCameraIcon from "@mui/icons-material/PhotoCamera";
 import EditIcon from "@mui/icons-material/Edit";
+import { useActions } from "common/hooks/useActions";
 
 export const Profile = () => {
   const [editMode, setEditMode] = useState(false);
-  const profile = useSelector(selectProfile);
+  const profile = useAppSelector(selectProfile);
   const [name, setName] = useState<string | null>(profile?.name || null);
 
-  const dispatch = useAppDispatch();
+  const { logout, changeProfileData } = useActions(authThunks);
   const logoutHandler = () => {
-    dispatch(authThunks.logout());
+    logout();
   };
 
   const changeEditModeHandler = () => {
@@ -28,7 +28,7 @@ export const Profile = () => {
   };
   useEffect(() => {
     if (name !== profile?.name) {
-      dispatch(authThunks.changeProfileData({ name }));
+      changeProfileData({ name });
     }
   }, [name]);
   return (

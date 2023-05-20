@@ -16,16 +16,16 @@ import {
 } from "@mui/material";
 import { Navigate, NavLink } from "react-router-dom";
 
-import { useAppDispatch } from "common/hooks";
+import { useAppSelector } from "common/hooks";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { ArgLoginType } from "features/auth/auth.api";
-import { useSelector } from "react-redux";
 import { selectIsLoggedIn } from "features/auth/auth.selectors";
 import * as yup from "yup";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { yupResolver } from "@hookform/resolvers/yup";
 import { PATH } from "common/components/routing/paths";
+import { useActions } from "common/hooks/useActions";
 
 const schema = yup.object().shape({
   email: yup
@@ -44,8 +44,8 @@ const schema = yup.object().shape({
 });
 
 export const Login = () => {
-  const dispatch = useAppDispatch();
-  const isLoggedIn = useSelector(selectIsLoggedIn);
+  const { login } = useActions(authThunks);
+  const isLoggedIn = useAppSelector(selectIsLoggedIn);
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
@@ -57,7 +57,7 @@ export const Login = () => {
   } = useForm<ArgLoginType>({ resolver: yupResolver(schema) });
 
   const onSubmit = handleSubmit((data) => {
-    dispatch(authThunks.login(data))
+    login(data)
       .unwrap()
       .then((res) => {
         toast.success("You are sign in");

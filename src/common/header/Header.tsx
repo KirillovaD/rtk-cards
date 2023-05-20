@@ -1,27 +1,27 @@
 import React, { FC } from "react";
-import { AppBar, Button, IconButton, LinearProgress, Toolbar } from "@mui/material";
+import { AppBar, LinearProgress, Toolbar } from "@mui/material";
 import { Menu } from "@mui/icons-material";
-import { useSelector } from "react-redux";
 import { selectIsLoading } from "app/app.selectors";
-import { selectProfile } from "features/auth/auth.selectors";
+import { selectIsLoggedIn, selectProfile } from "features/auth/auth.selectors";
 import profileImg from "features/profile/Ellipse 45.png";
 import s from "./index.module.css";
 import { NavLink } from "react-router-dom";
 import { PATH } from "common/components/routing/paths";
 import LogoutIcon from "@mui/icons-material/Logout";
-import { useAppDispatch } from "common/hooks";
+import { useAppSelector } from "common/hooks";
 import { authThunks } from "features/auth/auth.slice";
+import { useActions } from "common/hooks/useActions";
 
 type Props = {
-  isLoggedIn: boolean;
   handleOpen: () => void;
 };
-export const Header: FC<Props> = ({ isLoggedIn, handleOpen }) => {
-  const isLoading = useSelector(selectIsLoading);
-  const profile = useSelector(selectProfile);
-  const dispatch = useAppDispatch();
+export const Header: FC<Props> = ({ handleOpen }) => {
+  const isLoggedIn = useAppSelector(selectIsLoggedIn);
+  const isLoading = useAppSelector(selectIsLoading);
+  const profile = useAppSelector(selectProfile);
+  const { logout } = useActions(authThunks);
   const logoutHandler = () => {
-    dispatch(authThunks.logout());
+    logout();
   };
   return (
     <AppBar position="static" color="inherit">

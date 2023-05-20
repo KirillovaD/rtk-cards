@@ -2,7 +2,6 @@ import React, { useRef, useState } from "react";
 import s from "./style.module.css";
 import { Button, FormControl, FormGroup, Grid, IconButton, InputAdornment, Paper, TextField } from "@mui/material";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useAppDispatch } from "common/hooks";
 import { Controller, useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
@@ -10,6 +9,7 @@ import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { authThunks } from "features/auth/auth.slice";
 import { toast } from "react-toastify";
 import { PATH } from "common/components/routing/paths";
+import { useActions } from "common/hooks/useActions";
 
 const schema = yup.object().shape({
   email: yup
@@ -36,7 +36,7 @@ export const SignUp = () => {
   const [showPassword, setShowPassword] = useState(false);
   const handleClickShowPassword = () => setShowPassword(!showPassword);
   const handleMouseDownPassword = () => setShowPassword(!showPassword);
-  const dispatch = useAppDispatch();
+  const { register } = useActions(authThunks);
   const navigate = useNavigate();
   const {
     handleSubmit,
@@ -54,7 +54,7 @@ export const SignUp = () => {
   const password = useRef({});
   password.current = watch("password", "");
   const onSubmit = async ({ email, password }: { email: string; password: string }) => {
-    dispatch(authThunks.register({ email, password }))
+    register({ email, password })
       .unwrap()
       .then((res) => {
         toast.success("You are registered");

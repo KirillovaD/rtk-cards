@@ -1,16 +1,11 @@
 import { GlobalError } from "common/components/globalError/GlobalError";
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { selectIsInitializes } from "app/app.selectors";
-import { selectIsLoggedIn } from "features/auth/auth.selectors";
 import { Header } from "common/header/Header";
 import { Routing } from "common/components/routing/Routing";
 import { Sidebar } from "common/sidebar/Sidebar";
 import s from "./style.module.css";
 
 function App() {
-  const isLoggedIn = useSelector(selectIsLoggedIn);
-  const isInitialized = useSelector(selectIsInitializes);
   const [open, setOpen] = useState(false);
   const handleClose = () => setOpen(false);
   const handleOpen = () => setOpen(true);
@@ -21,14 +16,13 @@ function App() {
   // }, [dispatch]);
 
   // if (isInitialized) {
-  //   return <Navigate to={PATH.PACKS} />;
+  //   return <PrivateRoutes />;
   // }
-
   return (
     <div className={s.app}>
       <GlobalError />
       <Sidebar open={open} handleClose={handleClose} />
-      <Header isLoggedIn={isLoggedIn} handleOpen={handleOpen} />
+      <Header handleOpen={handleOpen} />
       <div className={s.wrapper}>
         <Routing />
       </div>
