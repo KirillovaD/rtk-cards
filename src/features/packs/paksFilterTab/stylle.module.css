@@ -11,9 +11,7 @@
     flex-direction: column;
     gap: 8px;
 }
-.packsSearch{
-    width: 415px;
-}
+
 .packsSlider{
     display: flex;
     align-items: center;

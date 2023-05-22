@@ -9,65 +9,34 @@ import { selectProfile } from "features/auth/auth.selectors";
 import { useActions } from "common/hooks/useActions";
 import { packsThunks } from "features/packs/packs.slice";
 import { useSearchParams } from "react-router-dom";
+import { InputSearch } from "common/components/inputs/inputSearch/InputSearch";
 
 export const PacksFilterTab: FC = () => {
-  const [find, setFind] = useState("");
   const [activeButton, setActiveButton] = useState<number>(1);
   const profile = useAppSelector(selectProfile);
   const { getPacks } = useActions(packsThunks);
+
   const handleButtonClick = (buttonIndex: number) => {
     setActiveButton(buttonIndex);
     getPacks(buttonIndex ? {} : { user_id: profile?._id });
   };
+
   const minmin = 0;
   const maxmax = 100;
   const [minNum, setMinNumCards] = useState(minmin);
   const [maxNum, setMaxNum] = useState(maxmax);
-
   const [cardsRangeValue, setCardsRangeValue] = useState([0, 100]);
-
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  const searchHandler = (event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    setFind(event.currentTarget.value);
-    const findQ: any = event.currentTarget.value ? { find: event.currentTarget.value } : {};
-    const { find, ...props } = Object.fromEntries(searchParams);
-    setSearchParams({ ...props, findQ });
-  };
-  const sendQuery = (value: string) => {
-    getPacks({ packName: value });
-  };
-  useEffect(() => {
-    const params = Object.fromEntries(searchParams);
-    sendQuery(params.find || "");
-    setFind(params.find || "");
-  }, [searchParams]);
 
   const numberCardsChangeHandler = (event: any, newValue: any) => {
     setMinNumCards(newValue[0]);
     setMaxNum(newValue[1]);
     setCardsRangeValue(newValue);
   };
+
+  const onChangeText = (value: string) => {};
   return (
     <div className={s.packsFilterTab}>
-      <div className={s.packsSearch}>
-        <label htmlFor={"search"}>Search</label>
-        <TextField
-          value={find}
-          id="search"
-          variant="outlined"
-          name={"search"}
-          size="small"
-          onChange={searchHandler}
-          InputProps={{
-            startAdornment: (
-              <InputAdornment position="end">
-                <SearchIcon />
-              </InputAdornment>
-            ),
-          }}
-        />
-      </div>
+      <InputSearch />
       <div className={s.packsShowSelect}>
         <label htmlFor={"showPacks"}>Show packs cards</label>
         <ButtonGroup disableElevation variant="contained" aria-label="Disabled elevation buttons">
@@ -135,3 +104,49 @@ export const PacksFilterTab: FC = () => {
     </div>
   );
 };
+
+// type SearchInputPropsType = InputBaseProps & {
+//   label?: string;
+//   searchValue: string;
+//   onChangeText?: (value: string) => void;
+// };
+// export const SearchInput: FC<SearchInputPropsType> = memo(({ label, onChangeText, searchValue, ...restProps }) => {
+//   const [value, setValue] = useState<string>(searchValue);
+//   const debouncedValue = useDebounce<string>(value, 500);
+//
+//
+//
+//   useEffect(() => {
+//     if (value === searchValue) return;
+//     setValue(searchValue);
+//   }, [searchValue]);
+//
+//   useEffect(() => {
+//     onChangeText?.(debouncedValue);
+//   }, [debouncedValue]);
+//
+//   return (
+//     <div>
+//       <span className={s.title}> {label}</span>
+//       <Paper component="form" elevation={0} className={s.container} sx={{ background: "transparent" }}>
+//         <img src={find} className={s.findIcon} alt="find" />
+//         <InputBase
+//           className={s.input}
+//           value={value}
+//           onChange={onChangeHandler}
+//           placeholder="Provide your text"
+//           inputProps={{ "aria-label": "provide your text" }}
+//           {...restProps}
+//         />
+//       </Paper>
+//     </div>
+//   );
+// });
+//
+// export const useDebounce = <T>(value: T, delay?: number): T => {
+//   const [debouncedValue, setDebouncedValue] = useState<T>(value)
+//
+//
+//
+//   return debouncedValue
+// }
