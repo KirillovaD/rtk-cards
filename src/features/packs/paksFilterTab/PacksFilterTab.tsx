@@ -1,6 +1,5 @@
-import React, { ChangeEvent, FC, useEffect, useState } from "react";
-import { Button, ButtonGroup, InputAdornment, TextField } from "@mui/material";
-import SearchIcon from "@mui/icons-material/Search";
+import React, { FC, useState } from "react";
+import { Button, ButtonGroup, TextField } from "@mui/material";
 import Slider from "@mui/material/Slider";
 import FilterAltIcon from "@mui/icons-material/FilterAlt";
 import s from "./stylle.module.css";
@@ -8,7 +7,6 @@ import { useAppSelector } from "common/hooks";
 import { selectProfile } from "features/auth/auth.selectors";
 import { useActions } from "common/hooks/useActions";
 import { packsThunks } from "features/packs/packs.slice";
-import { useSearchParams } from "react-router-dom";
 import { InputSearch } from "common/components/inputs/inputSearch/InputSearch";
 
 export const PacksFilterTab: FC = () => {
