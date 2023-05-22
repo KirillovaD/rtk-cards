@@ -30,8 +30,6 @@ export const PacksFilterTab: FC = () => {
     setMaxNum(newValue[1]);
     setCardsRangeValue(newValue);
   };
-
-  const onChangeText = (value: string) => {};
   return (
     <div className={s.packsFilterTab}>
       <InputSearch />
