@@ -15,8 +15,6 @@ export const Packs = () => {
   const [page, setPage] = useState(1);
   const [itemsCountForPage, setItemsCountForPage] = useState(7);
 
-  const [sort, setSort] = useState("");
-
   const onChangePagination = (newPage: number, newCount: number) => {
     setPage(newPage);
     setItemsCountForPage(newCount);
@@ -31,7 +29,6 @@ export const Packs = () => {
     } else {
       getPacks({});
     }
-    console.log(page, itemsCountForPage);
   }, [searchParams]);
 
   return (

@@ -36,6 +36,7 @@ const slice = createSlice({
 const getPacks = createAppAsyncThunk<{ packsPage: FetchPacksResponseType }, GetPacksPayloadType>(
   "packs/getPacks",
   async (arg, thunkAPI) => {
+    debugger;
     return thunkTryCatch(thunkAPI, async () => {
       const res = await packsApi.getPacks({ ...arg, pageCount: arg.pageCount ?? 5 });
       return { packsPage: res.data };

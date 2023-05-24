@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, useState } from "react";
 import Paper from "@mui/material/Paper";
 import TableContainer from "@mui/material/TableContainer";
 import Table from "@mui/material/Table";
@@ -15,13 +15,28 @@ import { useAppSelector } from "common/hooks";
 import { packsThunks } from "features/packs/packs.slice";
 import { EditPackModal } from "features/packs/packsTable/EditPackModal/EditPackModal";
 import { useActions } from "common/hooks/useActions";
+import TableSortLabel from "@mui/material/TableSortLabel";
+import { useNavigate, useSearchParams } from "react-router-dom";
+import { PATH } from "common/components/routing/paths";
 
 export const PacksTable: FC = () => {
   const packs = useAppSelector(selectPacks);
   const profile = useAppSelector(selectProfile);
-  const { deletePack } = useActions(packsThunks);
+  const { deletePack, getPacks } = useActions(packsThunks);
+  const [_, setSearchParams] = useSearchParams();
+  const navigate = useNavigate();
+
+  const [sort, setSort] = useState<"asc" | "desc">("asc");
+
   const deletePackHandler = (packId: string) => {
     deletePack(packId);
+  };
+  const sortHandler = () => {
+    debugger;
+    const newOrder = sort === "asc" ? "desc" : "asc";
+    setSort(newOrder);
+    debugger;
+    setSearchParams({ sortPacks: sort });
   };
 
   return (
@@ -38,11 +53,15 @@ export const PacksTable: FC = () => {
                   },
                 }}
               >
-                <TableCell>Name</TableCell>
+                <TableCell sx={{ width: "30%" }}>Name</TableCell>
                 <TableCell align="center" sx={{ width: "10%" }}>
                   Cards
                 </TableCell>
-                <TableCell align="center">Last Updated</TableCell>
+                <TableCell align="center" sx={{ width: "20%" }}>
+                  <TableSortLabel active direction={sort} onClick={sortHandler}>
+                    Last Updated
+                  </TableSortLabel>
+                </TableCell>
                 <TableCell align="center">Created by</TableCell>
                 <TableCell align="center">Actions</TableCell>
               </TableRow>
@@ -57,7 +76,7 @@ export const PacksTable: FC = () => {
                 const formattedDate = `${day}.${month}.${year}`;
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={pack._id}>
-                    <TableCell component="th" scope="row">
+                    <TableCell component="th" scope="row" onClick={() => navigate(PATH.PACKS + PATH.CARDS)}>
                       {pack.name}
                     </TableCell>
                     <TableCell align="center">{pack.cardsCount}</TableCell>
