@@ -8,10 +8,12 @@ import { selectProfile } from "features/auth/auth.selectors";
 import { useActions } from "common/hooks/useActions";
 import { packsThunks } from "features/packs/packs.slice";
 import { InputSearch } from "common/components/inputs/inputSearch/InputSearch";
+import { useSearchParams } from "react-router-dom";
 
 export const PacksFilterTab: FC = () => {
   const [activeButton, setActiveButton] = useState<number>(1);
   const profile = useAppSelector(selectProfile);
+  const [_, setSearchParams] = useSearchParams();
   const { getPacks } = useActions(packsThunks);
 
   const handleButtonClick = (buttonIndex: number) => {
@@ -29,6 +31,7 @@ export const PacksFilterTab: FC = () => {
     setMinNumCards(newValue[0]);
     setMaxNum(newValue[1]);
     setCardsRangeValue(newValue);
+    setSearchParams({ min: newValue[0], max: newValue[1] });
   };
   return (
     <div className={s.packsFilterTab}>
@@ -100,49 +103,3 @@ export const PacksFilterTab: FC = () => {
     </div>
   );
 };
-
-// type SearchInputPropsType = InputBaseProps & {
-//   label?: string;
-//   searchValue: string;
-//   onChangeText?: (value: string) => void;
-// };
-// export const SearchInput: FC<SearchInputPropsType> = memo(({ label, onChangeText, searchValue, ...restProps }) => {
-//   const [value, setValue] = useState<string>(searchValue);
-//   const debouncedValue = useDebounce<string>(value, 500);
-//
-//
-//
-//   useEffect(() => {
-//     if (value === searchValue) return;
-//     setValue(searchValue);
-//   }, [searchValue]);
-//
-//   useEffect(() => {
-//     onChangeText?.(debouncedValue);
-//   }, [debouncedValue]);
-//
-//   return (
-//     <div>
-//       <span className={s.title}> {label}</span>
-//       <Paper component="form" elevation={0} className={s.container} sx={{ background: "transparent" }}>
-//         <img src={find} className={s.findIcon} alt="find" />
-//         <InputBase
-//           className={s.input}
-//           value={value}
-//           onChange={onChangeHandler}
-//           placeholder="Provide your text"
-//           inputProps={{ "aria-label": "provide your text" }}
-//           {...restProps}
-//         />
-//       </Paper>
-//     </div>
-//   );
-// });
-//
-// export const useDebounce = <T>(value: T, delay?: number): T => {
-//   const [debouncedValue, setDebouncedValue] = useState<T>(value)
-//
-//
-//
-//   return debouncedValue
-// }

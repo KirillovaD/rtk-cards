@@ -7,3 +7,9 @@
     flex-direction: row-reverse;
 
 }
+
+.actionIcons{
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}

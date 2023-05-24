@@ -14,7 +14,7 @@ const slice = createSlice({
   initialState: {
     cardPacks: [] as PackType[],
     page: 1,
-    pageCount: 10,
+    pageCount: 7,
     cardPacksTotalCount: 2000,
     minCardsCount: 0,
     maxCardsCount: 100,
@@ -37,8 +37,7 @@ const getPacks = createAppAsyncThunk<{ packsPage: FetchPacksResponseType }, GetP
   "packs/getPacks",
   async (arg, thunkAPI) => {
     return thunkTryCatch(thunkAPI, async () => {
-      const pageCount = 7;
-      const res = await packsApi.getPacks({ pageCount, ...arg });
+      const res = await packsApi.getPacks({ ...arg, pageCount: arg.pageCount ?? 5 });
       return { packsPage: res.data };
     });
   }

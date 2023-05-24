@@ -44,9 +44,7 @@ export const PacksTable: FC = () => {
                 </TableCell>
                 <TableCell align="center">Last Updated</TableCell>
                 <TableCell align="center">Created by</TableCell>
-                <TableCell align="center" sx={{ width: "10%" }}>
-                  Actions
-                </TableCell>
+                <TableCell align="center">Actions</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -65,14 +63,16 @@ export const PacksTable: FC = () => {
                     <TableCell align="center">{pack.cardsCount}</TableCell>
                     <TableCell align="center">{formattedDate}</TableCell>
                     <TableCell align="center">{pack.user_name}</TableCell>
-                    <TableCell align="center" sx={{ display: "flex", justifyContent: "center", gap: "20px" }}>
-                      <SchoolIcon color="action" />
-                      {profile?._id === pack.user_id && (
-                        <div className={s.editIcons}>
-                          <DeleteIcon color="action" onClick={() => deletePackHandler(pack._id)} />
-                          <EditPackModal data={pack} />
-                        </div>
-                      )}
+                    <TableCell align="center">
+                      <div className={s.actionIcons}>
+                        <SchoolIcon color="action" />
+                        {profile?._id === pack.user_id && (
+                          <div className={s.editIcons}>
+                            <DeleteIcon color="action" onClick={() => deletePackHandler(pack._id)} />
+                            <EditPackModal data={pack} />
+                          </div>
+                        )}
+                      </div>
                     </TableCell>
                   </TableRow>
                 );
