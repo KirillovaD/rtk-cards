@@ -1,5 +1,5 @@
 import { useParams, useSearchParams } from "react-router-dom";
-import { useAddCardMutation, useGetCardsQuery } from "features/cards/service/cards.slice";
+import { useGetCardsQuery } from "features/cards/service/cards.slice";
 import React, { useState } from "react";
 import { CardsHeader } from "features/cards/components/cardsHeader/CardsHeader";
 import { EmptyCardUser } from "features/cards/components/emptyCard/EmptyCardUser";
@@ -9,7 +9,6 @@ import { selectProfile } from "features/auth/auth.selectors";
 import Button from "@mui/material/Button";
 import { AddCardModal } from "features/cards/components/addCardModal/AddCardModal";
 import { CardsTable } from "features/cards/components/cardsTable/CardsTable";
-import Pagination from "@mui/material/Pagination";
 import { PaginationCustom } from "features/packs/pagination/Pagination";
 
 export const Cards = () => {

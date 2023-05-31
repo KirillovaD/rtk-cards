@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FC, useState } from "react";
+import React, { ChangeEvent, FC } from "react";
 import { useAppSelector } from "common/hooks";
 import { selectPacks } from "features/packs/packs.selectors";
 import s from "./styles.module.css";

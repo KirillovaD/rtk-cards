@@ -1,4 +1,4 @@
-import React, { FC, useState, MouseEvent } from "react";
+import React, { FC, MouseEvent, useState } from "react";
 import Paper from "@mui/material/Paper";
 import TableContainer from "@mui/material/TableContainer";
 import Table from "@mui/material/Table";
@@ -17,7 +17,6 @@ import { EditPackModal } from "features/packs/packsTable/EditPackModal/EditPackM
 import { useActions } from "common/hooks/useActions";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { PATH } from "common/service/routing/paths";
 
 const headerCells = [
   { id: "name", label: "Name", sortable: true, sortType: "string" },
@@ -30,7 +29,7 @@ const headerCells = [
 export const PacksTable: FC = () => {
   const packs = useAppSelector(selectPacks);
   const profile = useAppSelector(selectProfile);
-  const { deletePack, getPacks } = useActions(packsThunks);
+  const { deletePack } = useActions(packsThunks);
   const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 

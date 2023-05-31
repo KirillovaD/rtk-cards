@@ -6,8 +6,6 @@ import DeleteIcon from "@mui/icons-material/Delete";
 import { CardType } from "features/cards/service/cards.slice.types";
 import s from "./index.module.css";
 
-const style = {};
-
 type IProps = {
   card: CardType;
 };

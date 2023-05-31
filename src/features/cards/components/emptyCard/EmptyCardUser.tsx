@@ -1,10 +1,5 @@
 import React, { FC, useState } from "react";
 import Button from "@mui/material/Button";
-import Modal from "@mui/material/Modal";
-import Box from "@mui/material/Box";
-import { TextField } from "@mui/material";
-import IconButton from "@mui/material/IconButton";
-import AddIcon from "@mui/icons-material/Add";
 import s from "./index.module.css";
 import { AddCardModal } from "features/cards/components/addCardModal/AddCardModal";
 

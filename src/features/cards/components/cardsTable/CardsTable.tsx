@@ -1,4 +1,4 @@
-import React, { FC, MouseEvent, useState } from "react";
+import React, { FC, useState } from "react";
 import Paper from "@mui/material/Paper";
 import TableContainer from "@mui/material/TableContainer";
 import Table from "@mui/material/Table";
@@ -13,15 +13,7 @@ import Rating from "@mui/material/Rating";
 import s from "./index.module.css";
 import { useAppSelector } from "common/hooks";
 import { selectProfile } from "features/auth/auth.selectors";
-import DeleteIcon from "@mui/icons-material/Delete";
 import { DeleteCardModal } from "features/cards/components/cardsTable/deleteCardModal/DeleteCardModal";
-
-// const headerCells: HeaderCells[] = [
-//   { id: "question", label: "Question", sortable: true, sortType: "string" },
-//   { id: "answer", label: "Answer", sortable: true, sortType: "string" },
-//   { id: "updated", label: "Last Updated", sortable: true, sortType: "string" },
-//   { id: "grade", label: "Grade", sortable: true, sortType: "string" },
-// ];
 
 type Props = {
   cards: FetchCardsResponseType;
@@ -117,11 +109,4 @@ export const CardsTable: FC<Props> = ({ cards }) => {
       </Paper>
     </div>
   );
-};
-
-type HeaderCells = {
-  id: string;
-  label: string;
-  sortable: boolean;
-  sortType?: string;
 };
