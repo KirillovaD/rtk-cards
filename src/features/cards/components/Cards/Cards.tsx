@@ -17,7 +17,7 @@ export const Cards = () => {
   let { packId } = useParams<{ packId: string }>();
   const [itemsCountForPage, setItemsCountForPage] = useState(7);
 
-  const [searchParams, setSearchParams] = useSearchParams();
+  const [_, setSearchParams] = useSearchParams();
 
   const profile = useAppSelector(selectProfile);
 

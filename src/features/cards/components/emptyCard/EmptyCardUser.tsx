@@ -10,12 +10,6 @@ type Props = {
 export const EmptyCardUser: FC<Props> = ({ packId }) => {
   const [open, setOpen] = useState(false);
 
-  const addNewName = () => {
-    // createPack({ name });
-    setOpen(false);
-    // setName("");
-  };
-
   return (
     <div className={s.info}>
       <p>This pack is empty. Click add new card to fill this pack</p>
