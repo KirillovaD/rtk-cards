@@ -1,0 +1,22 @@
+.info {
+    padding-top: 86px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 32px
+}
+
+.info p {
+    font-size: 16px;
+    line-height: 20px;
+    color: #000000;
+    opacity: 0.5;
+    text-align: center;
+}
+
+
+.addName {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}

@@ -4,7 +4,7 @@ import { Button, Grid, Paper } from "@mui/material";
 import { NavLink } from "react-router-dom";
 
 import checkMail from "./check_email.png";
-import { PATH } from "common/components/routing/paths";
+import { PATH } from "common/service/routing/paths";
 
 export const CheckMail = () => {
   return (

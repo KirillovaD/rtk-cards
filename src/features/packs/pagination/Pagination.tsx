@@ -13,7 +13,6 @@ export const PaginationCustom: FC<Props> = ({ onChange, page, itemsCountForPage 
   const packs = useAppSelector(selectPacks);
   const pages = Math.ceil(packs.cardPacksTotalCount / packs.pageCount);
   const options = [
-    { id: 5, value: 5 },
     { id: 7, value: 7 },
     { id: 10, value: 10 },
   ];

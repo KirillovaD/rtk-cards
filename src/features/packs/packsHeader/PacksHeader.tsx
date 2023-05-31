@@ -66,6 +66,7 @@ export const PacksHeader: FC = () => {
                 placeholder="Name"
                 onChange={(e) => setName(e.currentTarget.value)}
                 onKeyDown={addPackOnKeyPress}
+                fullWidth={true}
               />
               <IconButton onClick={addNewName}>
                 <AddIcon color="primary" fontSize="small" />

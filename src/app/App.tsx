@@ -1,7 +1,7 @@
 import { GlobalError } from "common/components/globalError/GlobalError";
 import React, { useEffect, useState } from "react";
 import { Header } from "common/header/Header";
-import { Routing } from "common/components/routing/Routing";
+import { Routing } from "common/service/routing/Routing";
 import { Sidebar } from "common/sidebar/Sidebar";
 import s from "./style.module.css";
 import { useAppDispatch } from "common/hooks";

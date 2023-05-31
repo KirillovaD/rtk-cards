@@ -4,11 +4,11 @@ import { packsThunks } from "features/packs/packs.slice";
 import EditIcon from "@mui/icons-material/Edit";
 import Modal from "@mui/material/Modal";
 import Box from "@mui/material/Box";
-import s from "features/packs/packsTable/style.module.css";
 import { TextField } from "@mui/material";
 import IconButton from "@mui/material/IconButton";
 import AddIcon from "@mui/icons-material/Add";
 import { useActions } from "common/hooks/useActions";
+import s from "./index.module.css";
 
 const style = {
   position: "absolute" as "absolute",
@@ -71,6 +71,7 @@ export const EditPackModal: FC<IProps> = ({ data }) => {
               placeholder="Name"
               onChange={(e) => setName(e.currentTarget.value)}
               onKeyDown={addPackOnKeyPress}
+              fullWidth={true}
             />
             <IconButton onClick={addNewName}>
               <AddIcon color="primary" fontSize="small" />

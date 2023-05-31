@@ -24,7 +24,7 @@ import { selectIsLoggedIn } from "features/auth/auth.selectors";
 import * as yup from "yup";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { PATH } from "common/components/routing/paths";
+import { PATH } from "common/service/routing/paths";
 import { useActions } from "common/hooks/useActions";
 
 const schema = yup.object().shape({

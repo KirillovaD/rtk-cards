@@ -1,0 +1,18 @@
+.back{
+    display: flex;
+    gap:8px;
+    align-items: center
+
+}
+.back svg{
+    width: 24px;
+    height: 24px;
+}
+
+
+.back a{
+    font-weight: 400;
+    font-size: 14px;
+    line-height: 24px;
+    color: #000000;
+}

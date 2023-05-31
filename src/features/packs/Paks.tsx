@@ -22,7 +22,6 @@ export const Packs = () => {
   };
 
   useEffect(() => {
-    debugger;
     const params = Object.fromEntries(searchParams);
     if (params) {
       getPacks(params);

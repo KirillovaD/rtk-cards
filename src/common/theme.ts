@@ -24,7 +24,6 @@ export const theme = createTheme({
     MuiSvgIcon: {
       styleOverrides: {
         root: {
-          fontSize: "1.5em",
           color: "primary",
           cursor: "pointer",
           "&:hover": {

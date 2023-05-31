@@ -6,7 +6,7 @@ import { selectIsLoggedIn, selectProfile } from "features/auth/auth.selectors";
 import profileImg from "features/profile/Ellipse 45.png";
 import s from "./index.module.css";
 import { NavLink } from "react-router-dom";
-import { PATH } from "common/components/routing/paths";
+import { PATH } from "common/service/routing/paths";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useAppSelector } from "common/hooks";
 import { authThunks } from "features/auth/auth.slice";

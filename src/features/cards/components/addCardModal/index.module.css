@@ -1,0 +1,17 @@
+.modalHeader{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+
+
+.formFields{
+    width: 20vw;
+}
+
+
+.formFields button{
+    margin-top: 20px;
+    align-self: flex-end;
+}

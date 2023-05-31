@@ -1,4 +1,4 @@
-import React, { FC, useState } from "react";
+import React, { FC, useState, MouseEvent } from "react";
 import Paper from "@mui/material/Paper";
 import TableContainer from "@mui/material/TableContainer";
 import Table from "@mui/material/Table";
@@ -17,13 +17,21 @@ import { EditPackModal } from "features/packs/packsTable/EditPackModal/EditPackM
 import { useActions } from "common/hooks/useActions";
 import TableSortLabel from "@mui/material/TableSortLabel";
 import { useNavigate, useSearchParams } from "react-router-dom";
-import { PATH } from "common/components/routing/paths";
+import { PATH } from "common/service/routing/paths";
+
+const headerCells = [
+  { id: "name", label: "Name", sortable: true, sortType: "string" },
+  { id: "cards", label: "Cards", sortable: true, sortType: "string" },
+  { id: "updated", label: "Last Updated", sortable: true, sortType: "string" },
+  { id: "created", label: "Created by", sortable: true, sortType: "string" },
+  { id: "actions", label: "Actions", sortable: false, sortType: "string" },
+] as const;
 
 export const PacksTable: FC = () => {
   const packs = useAppSelector(selectPacks);
   const profile = useAppSelector(selectProfile);
   const { deletePack, getPacks } = useActions(packsThunks);
-  const [_, setSearchParams] = useSearchParams();
+  const [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
 
   const [sort, setSort] = useState<"asc" | "desc">("asc");
@@ -31,39 +39,44 @@ export const PacksTable: FC = () => {
   const deletePackHandler = (packId: string) => {
     deletePack(packId);
   };
-  const sortHandler = () => {
-    debugger;
+  const sortHandler = (event: MouseEvent<HTMLSpanElement, Event>, id: string) => {
     const newOrder = sort === "asc" ? "desc" : "asc";
     setSort(newOrder);
-    debugger;
-    setSearchParams({ sortPacks: sort });
+    if (newOrder === "asc") {
+      setSearchParams({ sortPacks: 0 + id });
+    }
+    if (newOrder === "desc") {
+      setSearchParams({ sortPacks: 1 + id });
+    }
   };
-
+  const navigateToCardsPageHandler = (packId: string) => {
+    navigate(`/cards/${packId}`);
+    //navigate(PATH.PACKS + PATH.CARDS
+  };
   return (
     <div className={s.packsTable}>
       <Paper sx={{ width: "100%", overflow: "hidden" }}>
         <TableContainer sx={{ maxHeight: "50vh" }}>
           <Table stickyHeader aria-label="sticky table">
             <TableHead>
-              <TableRow
-                sx={{
-                  "& th": {
-                    fontWeight: "bold",
-                    backgroundColor: "#EFEFEF",
-                  },
-                }}
-              >
-                <TableCell sx={{ width: "30%" }}>Name</TableCell>
-                <TableCell align="center" sx={{ width: "10%" }}>
-                  Cards
-                </TableCell>
-                <TableCell align="center" sx={{ width: "20%" }}>
-                  <TableSortLabel active direction={sort} onClick={sortHandler}>
-                    Last Updated
-                  </TableSortLabel>
-                </TableCell>
-                <TableCell align="center">Created by</TableCell>
-                <TableCell align="center">Actions</TableCell>
+              <TableRow>
+                {headerCells.map((headerCell) => {
+                  return (
+                    <TableCell key={headerCell.id} align={"center"} className={s.headerCell}>
+                      {headerCell.sortable ? (
+                        <TableSortLabel
+                          active={Object.fromEntries(searchParams).sortPacks?.slice(1) === headerCell.id}
+                          direction={sort}
+                          onClick={(event) => sortHandler(event, headerCell.id)}
+                        >
+                          {headerCell.label}
+                        </TableSortLabel>
+                      ) : (
+                        headerCell.label
+                      )}
+                    </TableCell>
+                  );
+                })}
               </TableRow>
             </TableHead>
             <TableBody>
@@ -76,7 +89,12 @@ export const PacksTable: FC = () => {
                 const formattedDate = `${day}.${month}.${year}`;
                 return (
                   <TableRow hover role="checkbox" tabIndex={-1} key={pack._id}>
-                    <TableCell component="th" scope="row" onClick={() => navigate(PATH.PACKS + PATH.CARDS)}>
+                    <TableCell
+                      component="th"
+                      scope="row"
+                      sx={{ cursor: "pointer" }}
+                      onClick={() => navigateToCardsPageHandler(pack._id)}
+                    >
                       {pack.name}
                     </TableCell>
                     <TableCell align="center">{pack.cardsCount}</TableCell>
@@ -84,7 +102,11 @@ export const PacksTable: FC = () => {
                     <TableCell align="center">{pack.user_name}</TableCell>
                     <TableCell align="center">
                       <div className={s.actionIcons}>
-                        <SchoolIcon color="action" />
+                        <SchoolIcon
+                          onClick={() => navigateToCardsPageHandler(pack._id)}
+                          sx={{ cursor: "pointer" }}
+                          color="action"
+                        />
                         {profile?._id === pack.user_id && (
                           <div className={s.editIcons}>
                             <DeleteIcon color="action" onClick={() => deletePackHandler(pack._id)} />

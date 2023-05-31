@@ -1,0 +1,11 @@
+.cardsTable{
+    padding-top: 24px;
+}
+.editableQuestion{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.editableQuestion svg{
+    width: 20px;
+}

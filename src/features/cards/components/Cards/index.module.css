@@ -1,0 +1,20 @@
+.cards h1{
+    padding-top: 27px;
+}
+.cardsInfo{
+    padding-top: 32px;
+    font-size: 16px;
+    line-height: 20px;
+    color: #000000;
+    opacity: 0.5;
+    text-align: center;
+}
+.cardsHeader{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.cardsBtns button:last-child{
+    margin-left: 10px;
+}
+

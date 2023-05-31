@@ -9,10 +9,12 @@ import { useActions } from "common/hooks/useActions";
 import { packsThunks } from "features/packs/packs.slice";
 import { InputSearch } from "common/components/inputs/inputSearch/InputSearch";
 import { useSearchParams } from "react-router-dom";
+import { selectPacks } from "features/packs/packs.selectors";
 
 export const PacksFilterTab: FC = () => {
   const [activeButton, setActiveButton] = useState<number>(1);
   const profile = useAppSelector(selectProfile);
+  const packs = useAppSelector(selectPacks);
   const [_, setSearchParams] = useSearchParams();
   const { getPacks } = useActions(packsThunks);
 
@@ -22,10 +24,10 @@ export const PacksFilterTab: FC = () => {
   };
 
   const minmin = 0;
-  const maxmax = 100;
+  const maxmax = packs.maxCardsCount;
   const [minNum, setMinNumCards] = useState(minmin);
   const [maxNum, setMaxNum] = useState(maxmax);
-  const [cardsRangeValue, setCardsRangeValue] = useState([0, 100]);
+  const [cardsRangeValue, setCardsRangeValue] = useState([0, packs.maxCardsCount]);
 
   const numberCardsChangeHandler = (event: any, newValue: any) => {
     setMinNumCards(newValue[0]);

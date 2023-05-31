@@ -1,6 +1,6 @@
 import React, { FC } from "react";
 import { NavLink } from "react-router-dom";
-import { PATH } from "common/components/routing/paths";
+import { PATH } from "common/service/routing/paths";
 import s from "./styles.module.css";
 import closeIcon from "./closeOutline.svg";
 import LogoutIcon from "@mui/icons-material/Logout";

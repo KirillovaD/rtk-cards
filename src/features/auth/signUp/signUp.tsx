@@ -8,7 +8,7 @@ import * as yup from "yup";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { authThunks } from "features/auth/auth.slice";
 import { toast } from "react-toastify";
-import { PATH } from "common/components/routing/paths";
+import { PATH } from "common/service/routing/paths";
 import { useActions } from "common/hooks/useActions";
 
 const schema = yup.object().shape({
